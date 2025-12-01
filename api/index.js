@@ -15,6 +15,7 @@ export default async function handler(request, response) {
       amount: data.amount_raw,
       message: data.message
     }));
+    await redis.zincrby('saweria_leaderboard', data.amount_raw, data.donator_name);
     return response.status(200).json({ status: 'ok' });
   }
 
